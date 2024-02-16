@@ -19,6 +19,9 @@ contract FlashLoan is FlashLoanSimpleReceiverBase {
         _;
     }
 
+    event LoanReceived(uint256 amount);
+    event LoanFee(uint256 amount);
+
     receive() external payable {}
 
     function executeOperation(
@@ -28,6 +31,8 @@ contract FlashLoan is FlashLoanSimpleReceiverBase {
         address initiator,
         bytes calldata params
     ) external override returns (bool) {
+        emit LoanReceived(amount);
+        emit LoanFee(premium);
         uint256 totalAmount = amount + premium;
         IERC20(asset).approve(address(POOL),totalAmount);
         return true;
