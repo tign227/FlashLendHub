@@ -2,7 +2,16 @@ require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.10",
+  solidity: {
+    compilers: [
+      {
+        version: "0.6.6",
+      },
+      {
+        version: "0.8.10",
+      },
+    ],
+  },
   networks: {
     hardhat: {
       forking: {
